@@ -106,6 +106,7 @@ pip install awscli
 sudo wget -O /usr/local/bin/gargs https://github.com/brentp/gargs/releases/download/v0.3.1/gargs_linux && sudo chmod 755 /usr/local/bin/gargs
 gargs -h
 
+
 ################################################################################
 ## Get reference genome fasta files
 ################################################################################
@@ -158,14 +159,24 @@ mv SRR3669929_1.fastq.gz PNUSAS002486_1.fastq.gz ; mv SRR3669929_2.fastq.gz PNUS
 ## Run the CFSAN SNP pipeline on the data you downloaded.
 ################################################################################
 
+## get the scripts you'll need to prepare directories for running cfsan
+git clone https://github.com/dcls/gdip
+cat ~/gdip/scripts/cfsan-prepare-directories.sh
+
+## Set up directory structure
 cd ~/exampledata
-~/scripts/cfsan-prepare-directories.sh
+~/gdip/scripts/cfsan-prepare-directories.sh
 cd cfsan
 tree
-# in a screen session:
-# screen -S cfsan
+
+## Run the pipeline. (in a screen session: `screen -S cfsan`, and ctrl-A, D to detach)
+# On an m2.2xlarge node (8 cores), this takes ~1hr walltime.
 time run_snp_pipeline.sh -m soft -o cfsan-output -s . /opt/genomes/senteritidisp125109.fasta
-# ctrl-A, D
+
+## Build a tree
+
+
+## Reroot the tree and output
 
 ################################################################################
 ## Optional: iterm2 shell integration, AWS CLI, etc.
