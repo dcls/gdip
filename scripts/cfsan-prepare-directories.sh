@@ -1,45 +1,52 @@
 #!/bin/bash
 
-## Assumes a directory with paired fastq files ending in either
-## _1.fastq.gz and _2.fastq.gz or R1.fastq.gz and R2.fastq.gz.
+HELP="
+Assumes a directory with paired fastq files ending in either
+_1.fastq.gz and _2.fastq.gz or R1.fastq.gz and R2.fastq.gz.
 
-## Running in the directory with these files will create a top-level
-## "cfsan" directory, with subdirectories for each sample name, 
-## extracted from the read name files by removing the suffix.
+Running in the directory with these files will create a top-level
+'cfsan' directory, with subdirectories for each sample name, 
+extracted from the read name files by removing the suffix.
 
-## Finally, the script will symlink the read_1 and read_2 files
-## into the appropriate cfsan/sample subdirectory. 
+Finally, the script will symlink the read_1 and read_2 files
+into the appropriate cfsan/sample subdirectory. 
 
-## E.g., go from this, a flat directory of _1 and _2.fastq.gz files:
+E.g., go from this, a flat directory of _1 and _2.fastq.gz files:
 
-# $ tree .
-# |-- samp1_1.fastq.gz
-# |-- samp1_2.fastq.gz
-# |-- samp2_1.fastq.gz
-# |-- samp2_2.fastq.gz
-# |-- samp3_1.fastq.gz
-# |-- samp3_2.fastq.gz
+$ tree .
+|-- samp1_1.fastq.gz
+|-- samp1_2.fastq.gz
+|-- samp2_1.fastq.gz
+|-- samp2_2.fastq.gz
+|-- samp3_1.fastq.gz
+|-- samp3_2.fastq.gz
 
-## to this, the correct directory structure as needed by CFSAN SNP pipeline.
+to this, the correct directory structure as needed by CFSAN SNP pipeline.
 
-# $ tree .
-# |-- cfsan
-# |   |-- samp1
-# |   |   |-- samp1_1.fastq.gz -> /home/ubuntu/exampledata/samp1_1.fastq.gz
-# |   |   |-- samp1_2.fastq.gz -> /home/ubuntu/exampledata/samp1_2.fastq.gz
-# |   |-- samp2
-# |   |   |-- samp2_1.fastq.gz -> /home/ubuntu/exampledata/samp2_1.fastq.gz
-# |   |   |-- samp2_2.fastq.gz -> /home/ubuntu/exampledata/samp2_2.fastq.gz
-# |   |-- samp3
-# |   |   |-- samp3_1.fastq.gz -> /home/ubuntu/exampledata/samp3_1.fastq.gz
-# |   |   |-- samp3_2.fastq.gz -> /home/ubuntu/exampledata/samp3_2.fastq.gz
-# |-- samp1_1.fastq.gz
-# |-- samp1_2.fastq.gz
-# |-- samp2_1.fastq.gz
-# |-- samp2_2.fastq.gz
-# |-- samp3_1.fastq.gz
-# |-- samp3_2.fastq.gz
+$ tree .
+|-- cfsan
+|   |-- samp1
+|   |   |-- samp1_1.fastq.gz -> /home/ubuntu/exampledata/samp1_1.fastq.gz
+|   |   |-- samp1_2.fastq.gz -> /home/ubuntu/exampledata/samp1_2.fastq.gz
+|   |-- samp2
+|   |   |-- samp2_1.fastq.gz -> /home/ubuntu/exampledata/samp2_1.fastq.gz
+|   |   |-- samp2_2.fastq.gz -> /home/ubuntu/exampledata/samp2_2.fastq.gz
+|   |-- samp3
+|   |   |-- samp3_1.fastq.gz -> /home/ubuntu/exampledata/samp3_1.fastq.gz
+|   |   |-- samp3_2.fastq.gz -> /home/ubuntu/exampledata/samp3_2.fastq.gz
+|-- samp1_1.fastq.gz
+|-- samp1_2.fastq.gz
+|-- samp2_1.fastq.gz
+|-- samp2_2.fastq.gz
+|-- samp3_1.fastq.gz
+|-- samp3_2.fastq.gz
+"
 
+# If the user invokes the script with -h, print some help.
+if [ "$1" == "-h" ]; then
+  echo "$HELP"
+  exit 0
+fi
 
 # For all pairs of fastq files
 for i in *[_R]1.fastq.gz
