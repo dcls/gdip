@@ -49,8 +49,8 @@ cat runsrst2.sh
 bash runsrst2.sh
 "
 
-# If the user invokes the script with -h, print some help.
-if [ "$1" == "-h" ]; then
+# If the user invokes the script with -h or any command line arguments, print some help.
+if [ "$#" -ne 0 ] || [ "$1" == "-h" ] ; then
 	echo "$HELP"
   exit 0
 fi
