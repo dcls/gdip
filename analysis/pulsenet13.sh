@@ -179,8 +179,24 @@ time srst2 --log \
 # cat runsrst2.sh
 # bash runsrst2.sh
 
+## Compile the output
+srst2 --prev_output srst2/*__genes__ARGannot.r1__results.txt --output srst2/srst2
 
-
+cat srst2/srst2__compiledResults.txt
+# Sample          Aac6-Iaa_AGly   TEM-1D_Bla
+# PNUSAS002243    Aac6-Iy_761*    -
+# PNUSAS002244    Aac6-Iy_761*    -
+# PNUSAS002245    Aac6-Iy_761*    -
+# PNUSAS002246    Aac6-Iy_761*    -
+# PNUSAS002247    Aac6-Iy_761*    -
+# PNUSAS002248    Aac6-Iy_761*    -
+# PNUSAS002249    Aac6-Iy_761*    TEM-198_1035*
+# PNUSAS002250    Aac6-Iy_761*    -
+# PNUSAS002251    Aac6-Iy_761*    -
+# PNUSAS002252    Aac6-Iy_761*    -
+# PNUSAS002484    Aac6-Iy_761*    -
+# PNUSAS002485    Aac6-Iy_761*    -
+# PNUSAS002486    Aac6-Iy_761*    -
 
 ################################################################################
 ## SRST2 for MLST for a single sample
@@ -202,3 +218,6 @@ time srst2 --log \
 # PNUSAS002249    11?     5       2?      3       7       6       6       11      0       dnaN-2/edge2.0  20.4158571429   0.333333333333
 # -----------------------------------------------------------------------------
 
+
+## You could extend multisrst2.sh to incorporate BOTH AMR and MLST.
+## https://github.com/katholt/srst2#running-lots-of-jobs-and-compiling-results
