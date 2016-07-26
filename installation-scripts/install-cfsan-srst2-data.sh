@@ -91,8 +91,11 @@ which run_snp_pipeline.sh
 ## Other useful stuff
 ################################################################################
 
-## Newick utilities?
-# wget http://cegg.unige.ch/pub/newick-utils-1.6-Linux-x86_64-disabled-extra.tar.gz
+## Install newick utilities
+wget http://cegg.unige.ch/pub/newick-utils-1.6-Linux-x86_64-disabled-extra.tar.gz
+tar zxvf newick-utils-1.6-Linux-x86_64-disabled-extra.tar.gz
+sudo cp newick-utils-1.6/src/nw_* /usr/local/bin
+rm -rf newick-utils-1.6*
 
 ## Get shell integration for iterm2, but first fix curl cert issue
 echo 'capath=/etc/ssl/certs/' >> .curlrc
