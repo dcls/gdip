@@ -57,8 +57,85 @@ tree
 # On an m2.2xlarge node (8 cores), this takes ~1hr walltime.
 time run_snp_pipeline.sh -m soft -o cfsan-output -s . /opt/genomes/senteritidisp125109.fasta
 
-## Build a tree
+# See what you've got
+cd ~/exampledata/cfsan/cfsan-output
+ls -l
+
+# the "samples" directory is huge. remove it if you don't want the alignments, etc.
+rm -rf ~/exampledata/cfsan/cfsan-output/samples
 
 
-## Reroot the tree and output
+################################################################################
+## Draw a tree
+################################################################################
+
+## Build a tree using generalized time-reversible mode
+FastTree -nt -gtr snpma.fasta > snpma.nw
+
+## Transfer this file over and open in FigTree. Or...
+
+## Optionally re-root the tree
+nw_reroot snpma.nw PNUSAS002249 > snpma.rerooted.nw
+
+## Render the re-rooted tree showing branch length (sbl) and support (ss)
+#  Save the image to a 1800x1200 png file.
+#  whatever is passed to -i will be appended to "t0.". 
+#  So, if you just pass "-i png", output will be "t0.png".
+#  If you passed "-i rerooted.png", output is "t0.rerooted.png"
+ete view -t snpma.rerooted.nw --ss --sbl -i png --Iw 1800 --Ih 1200
+
+# Or, just render the default arbitrarily rooted tree in text
+ete view -t snpma.nw --text
+#    /-PNUSAS002485
+#   |
+#   |--PNUSAS002486
+#   |
+#   |   /-PNUSAS002484
+# --|  |
+#   |  |         /-PNUSAS002244
+#   |  |      /-|
+#   |  |     |   \-PNUSAS002248
+#   |  |     |
+#    \-|     |            /-PNUSAS002245
+#      |     |         /-|
+#      |   /-|      /-|   \-PNUSAS002247
+#      |  |  |     |  |
+#      |  |  |   /-|   \-PNUSAS002249
+#      |  |  |  |  |
+#      |  |  |  |  |   /-PNUSAS002243
+#       \-|   \-|   \-|
+#         |     |      \-PNUSAS002252
+#         |     |
+#         |      \-PNUSAS002246
+#         |
+#         |   /-PNUSAS002250
+#          \-|
+#             \-PNUSAS002251
+
+## Or do it all in one step
+FastTree -quiet -nt -gtr snpma.fasta \
+  | nw_reroot /dev/stdin PNUSAS002249 \
+  | ete view -t /dev/stdin --ss --sbl -i png --Iw 1800 --Ih 1200
+## Rerooted rendered tree png file is saved in t0.png
+
+################################################################################
+## Run SRST2 on a few samples
+################################################################################
+
+cd ~/exampledata
+
+# MLST search
+time srst2 --log \
+  --input_pe PNUSAS002249_1.fastq.gz PNUSAS002249_2.fastq.gz \
+  --output srst2/PNUSAS002249-mlst \
+  --mlst_db          /opt/genomes/mlst_senterica/Salmonella_enterica.fasta \
+  --mlst_definitions /opt/genomes/mlst_senterica/senterica.txt \
+  --mlst_delimiter '-'
+
+# AMR search
+time srst2 --log \
+  --input_pe PNUSAS002249_1.fastq.gz PNUSAS002249_2.fastq.gz \
+  --output   srst2/PNUSAS002249-amr \
+  --gene_db  /home/ubuntu/srst2/data/ARGannot.r1.fasta
+
 
