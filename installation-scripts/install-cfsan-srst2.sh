@@ -188,6 +188,7 @@ echo "export SRST2_BOWTIE2_BUILD=/opt/software/bowtie2-2.2.4/bowtie2-build" >> ~
 source ~/.bash_profile
 
 ## install SRST2
+git clone https://github.com/katholt/srst2
 pip install srst2/
 srst2 --version
 
