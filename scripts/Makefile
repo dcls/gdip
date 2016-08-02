@@ -1,7 +1,7 @@
 MLST_REF := Salmonella_enterica
 DATE := $(shell date +%F)
 
-all: ./cfsan/*/*_[12].fastq ./cfsan-output/snpma.fasta ./treefile.nwk ./srst2/amr/*__fullgenes__ARGannot.r1__results.txt ./srst2/mlst/*__mlst__${MLST_REF}__results.txt ./gdip_results_${DATE}/treefile.nwk ./gdip_results_${DATE}/*ARGannot.r1__results.txt ./gdip_results_${DATE}/*__mlst__${MLST_REF}__results.txt ./gdip_results_${DATE}.zip
+all: ./cfsan/*/*_[12].fastq ./cfsan-output/snpma.fasta ./treefile.nwk ./srst2/amr/*__fullgenes__ARGannot.r1__results.txt ./srst2/mlst/*__mlst__${MLST_REF}__results.txt ./gdip_results_${DATE}/* ./gdip_results_${DATE}/treefile.nwk ./gdip_results_${DATE}/*ARGannot.r1__results.txt ./gdip_results_${DATE}/*__mlst__${MLST_REF}__results.txt ./gdip_results_${DATE}.zip
 
 tree-only: ./cfsan/*/*_[12].fastq ./cfsan-output/snpma.fasta ./treefile.nwk ./gdip_results_${DATE}/treefile.nwk ./gdip_results_${DATE}.zip
 
@@ -36,26 +36,26 @@ clean:
 	mlstsrst2.sh | bash
 
 # Create directory for final report
-./gdip_results_${DATE}/:
-	mkdir gdip_results_${DATE}/
+./gdip_results_${DATE}/*:
+	mkdir ./gdip_results_${DATE}/
 
-# Create directory for final report and add snp-distance martix
+# Add snp-distance martix to final report directory
 ./gdip_results_${DATE}/cfsan-snp/snpma.fasta: ./cfsan-output/snpma.fasta ./gdip_results_${DATE} 
-	ln -s $(shell pwd)/cfan-output/snpma.fasta ./gdip_results_${DATE}
+	ln -s $(shell pwd)/csfan-output/snpma.fasta ./gdip_results_${DATE}
 	
 # Add tree to final report directory
 ./gdip_results_${DATE}/treefile.nwk: treefile.nwk ./gdip_results_${DATE}/cfsan-snp/snpma.fasta
-	ln -s $(shell pwd)/treefile.nwk
+	ln -s $(shell pwd)/treefile.nwk ./gdip_results_${DATE}
 
 # Add srst2 AMR to final report directory
 ./gdip_results_${DATE}/*ARGannot.r1__results.txt: srst2/amr/*__fullgenes__ARGannot.r1__results.txt
-	ln -s $(shell pwd)/srst2/amr/*__fullgenes__ARGannot.r1__results.txt ./gdip_report_${DATE}
+	ln -s $(shell pwd)/srst2/amr/*__fullgenes__ARGannot.r1__results.txt ./gdip_results_${DATE}
 
 # Add srst2 MLST to final report directory
 ./gdip_results_${DATE}/*__mlst__${MLST_REF}__results.txt: ./srst2/mlst/*__mlst__${MLST_REF}__results.txt
-	 ln -s $(shell pwd)/srst2/mlst/*__mlst__${MLST_REF}__results.txt ./gdip_report_${DATE}
+	 ln -s $(shell pwd)/srst2/mlst/*__mlst__${MLST_REF}__results.txt ./gdip_results_${DATE}
 
 # Compress final report for sharing
-./gdip_results_${DATE}.zip: gdip_results_${DATE}/
-	zip -r gdip_report_${DATE}.zip gdip_results_${DATE}/
+./gdip_results_${DATE}.zip: ./gdip_results_${DATE}/*
+	zip -r $@ ./gdip_results_${DATE}/*
 
