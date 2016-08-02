@@ -1,0 +1,3 @@
+# Git will not track the following file patterns
+
+.DS_Store
