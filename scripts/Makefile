@@ -15,9 +15,6 @@ clean:
 
 .PHONY: all tree-only amr mlst clean
 
-recognized-file.txt: ./*_gdip-report/srst2/amr
-	touch recognized-file.txt
-
 # Organize data into CFSAN-SNP-friendly directories
 ./cfsan/${SAMPLES}/: *[_R]1.fastq.gz
 	cfsan-prepare-directories.sh
