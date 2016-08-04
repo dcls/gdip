@@ -10,7 +10,10 @@ amr: ./srst2/amr/*__fullgenes__ARGannot.r1__results.txt ./*-gdip-report/srst2/am
 
 mlst: ./srst2/mlst/*__results.txt ./*-gdip-report/srst2/mlst ./*-gdip-report.zip
 
-.PHONY: all 
+clean: 
+	sudo rm -r ./cfsan/ ./cfsan-output/ ./treefile.nwk ./srst2/ ./*-gdip-report*
+
+.PHONY: all tree-only amr mlst clean
 
 recognized-file.txt: ./*_gdip-report/srst2/amr
 	touch recognized-file.txt
