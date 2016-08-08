@@ -1,4 +1,5 @@
 SAMPLES := $(wildcard [$(shell find *_1.fastq.gz | cut -f1 -d_ | paste -s -d ',')])
+REF_GENOME := /opt/genomes/senteritidisp125109.fasta
 MLST_REF := Salmonella_enterica
 DATE := $(shell date +%F)
 
@@ -21,7 +22,7 @@ clean:
 
 # Run CFSAN SNP Pipeline to generate snp-distance matrix
 ./cfsan-output/snpma.fasta: ./cfsan/${SAMPLES}/
-	cfsan-snp.sh
+	run_snp_pipeline.sh -m soft -o cfsan-output -s ./cfsan ${REF_GENOME}
 
 # Run FastTree to generate phylogeny tree
 ./treefile.nwk: ./cfsan-output/snpma.fasta
