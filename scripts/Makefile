@@ -36,11 +36,10 @@ clean:
 ./srst2/mlst/*__results.txt: *[_R]1.fastq.gz
 	mlstsrst2.sh | bash
 
-# Create directory for final report, add matrix and tree
-./*-gdip-report/treefile.nwk: ./cfsan-output/snpma.fasta ./treefile.nwk 
-	mkdir ./${DATE}-gdip-report/ 
-	ln -s $(shell pwd)/cfsan-output/snpma.fasta ./${DATE}-gdip-report/
-	ln -s $(shell pwd)/treefile.nwk ./${DATE}-gdip-report/
+# Create directory for final report, add tree, matrix fasta/pairwise/distance, and metrics
+./*-gdip-report/treefile.nwk: ./treefile.nwk 
+	mkdir -p ./${DATE}-gdip-report/ 
+	cp treefile.nwk cfsan-output/metrics.tsv cfsan-output/snpma.fasta cfsan-output/snp_distance_matrix.tsv cfsan-output/snp_distance_pairwise.tsv ./${DATE}-gdip-report/
 
 # Add SRST@ AMR to final report
 ./*-gdip-report/srst2/amr: ./srst2/amr/*__fullgenes__ARGannot.r1__results.txt
