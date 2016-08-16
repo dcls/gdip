@@ -14,7 +14,9 @@ Pipe this output to |sh to run those commands, or save to a script.
 The gene database is its default location in the home directory.
 The number of threads to be used is taken from the nproc command
 but can be overridden by modifying the script.
+
 E.g., running this script in a directory with _1 and _2.fastq.gz files:
+
 $ ls
 samp1_1.fastq.gz
 samp1_2.fastq.gz
@@ -22,17 +24,23 @@ samp2_1.fastq.gz
 samp2_2.fastq.gz
 samp3_1.fastq.gz
 samp3_2.fastq.gz
+
 Will echo these commands out to the STDOUT....
+
 $ multisrst2.sh
 srst2 --log --input_pe samp1_1.fastq.gz samp1_2.fastq.gz --output srst2/amr_samp1 --gene_db /home/ubuntu/srst2/data/ARGannot.r1.fasta --threads 2
 srst2 --log --input_pe samp2_1.fastq.gz samp2_2.fastq.gz --output srst2/amr_samp2 --gene_db /home/ubuntu/srst2/data/ARGannot.r1.fasta --threads 2
 srst2 --log --input_pe samp3_1.fastq.gz samp3_2.fastq.gz --output srst2/amr_samp3 --gene_db /home/ubuntu/srst2/data/ARGannot.r1.fasta --threads 2
+
 ...Pipe to |bash to run them...
+
 # Preview what you'll do:
 multisrst2.sh 
 # Actually run it
 multisrst2.sh | bash
+
 ... or save to a script, preview the script, then run the script.
+
 multisrst2.sh > runsrst2.sh
 cat runsrst2.sh
 bash runsrst2.sh
