@@ -14,6 +14,9 @@ mlst: ./srst2/mlst/*__results.txt ./${DATE}-gdip-report/srst2/mlst ./${DATE}-gdi
 clean: 
 	rm -rf ./cfsan/ ./cfsan-output/ ./treefile.nwk ./srst2/ ./${DATE}-gdip-report*
 
+make_space:
+	rm -r ./srst2/*/*.bam ./srst2/*/*.pileup
+
 .PHONY: all tree-only amr mlst clean
 
 # Organize data into CFSAN-SNP-friendly directories
