@@ -1,20 +1,17 @@
 # DCLS GDIP
 
-Lorem ipsum text about the DCLS GDIP
+Pipeline to generate SNP matricies, phylogenetic trees, multilocus sequence typing (MLST) and antimicrobial micorbial resistance gene (AMR) reports from sequenced isolates involved in food-borne outbreak investigations.
 
+## Pipeline 
 
-## Pipeline description
-
-Put an image here with some text
-
-![](pipeline.png)
+![](./pipeline.png)
 
 ## Quick Start
 
-Put a Makefile in the folder, run `make`. 
+Copy ~/gdip/scripts/Makefile to a directory containing the pair-end fastq.gz reads of interest, run `make` 
 
 ## People
 
 Stephen contact info etc.
 
-Kevin
+Kevin G. Libuit - Kevin@Libuit.com
