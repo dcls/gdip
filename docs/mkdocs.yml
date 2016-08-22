@@ -1,5 +1,5 @@
 site_name: DCLS GDIP
-theme: readthedocs  
+theme: readthedocs
 pages: 
 - Home: index.md
 - User Guide: userguide.md
