@@ -2,16 +2,27 @@
 
 Pipeline to generate SNP matricies, phylogenetic trees, multilocus sequence typing (MLST) and antimicrobial micorbial resistance gene (AMR) reports from sequenced isolates involved in food-borne outbreak investigations.
 
-## Pipeline 
+# Pipeline 
 
 ![](./pipeline.png)
 
-## Quick Start
+# Quick Start
 
-Copy ~/gdip/scripts/Makefile to a directory containing the pair-end fastq.gz reads of interest, run `make` 
+Assuming the [dcls/gdip/scripts](https://github.com/dcls/gdip/tree/master/scripts) directory is on your `$PATH`:
 
-## People
+1. Enter a directory with some fastq files ending in `_1.fastq.gz` and `_2.fastq.gz`.
+2. Copy the makefile using the command `copy_makefile`.
+3. Run the pipeline with `make`.
 
-Stephen contact info etc.
+E.g.:
 
-Kevin G. Libuit - Kevin@Libuit.com
+```sh
+cd exampledata
+copy_makefile
+make
+```
+
+# Contact
+
+- [Stephen D. Turner](http://www.google.com/recaptcha/mailhide/d?k=01lKgXnqE6Va_tcIEkUUMMXA==&c=8cNmVsuwaP7OG163K8z49WDuv5M9HBlzj1rfgVsTX_Y=)
+- [Kevin G. Libuit](http://www.google.com/recaptcha/mailhide/d?k=01lKgXnqE6Va_tcIEkUUMMXA==&c=dCq1Is6PZSxjhRTptzOs-aBj0v9PvkiwAq3olZuP1Ek=)
