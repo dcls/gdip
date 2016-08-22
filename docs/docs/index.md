@@ -2,10 +2,6 @@
 
 Pipeline to generate SNP matricies, phylogenetic trees, multilocus sequence typing (MLST) and antimicrobial micorbial resistance gene (AMR) reports from sequenced isolates involved in food-borne outbreak investigations.
 
-# Pipeline 
-
-![](./pipeline.png)
-
 # Quick Start
 
 Assuming the [dcls/gdip/scripts](https://github.com/dcls/gdip/tree/master/scripts) directory is on your `$PATH`:
@@ -14,13 +10,22 @@ Assuming the [dcls/gdip/scripts](https://github.com/dcls/gdip/tree/master/script
 2. Copy the makefile using the command `copy_makefile`.
 3. Run the pipeline with `make`.
 
-E.g.:
-
 ```sh
+# Enter the directory with the data:
 cd exampledata
+
+# Copy the makefile:
 copy_makefile
+
+# Start the pipeline!
 make
 ```
+
+For full instructions, see the [User Guide](userguide).
+
+# Pipeline 
+
+![](./pipeline.png)
 
 # Contact
 
