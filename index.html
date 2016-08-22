@@ -62,11 +62,14 @@
             
                 <li class="toctree-l3"><a href="#dcls-gdip">DCLS GDIP</a></li>
                 
-                    <li><a class="toctree-l4" href="#pipeline-description">Pipeline description</a></li>
+            
+                <li class="toctree-l3"><a href="#quick-start">Quick Start</a></li>
                 
-                    <li><a class="toctree-l4" href="#quick-start">Quick Start</a></li>
+            
+                <li class="toctree-l3"><a href="#pipeline">Pipeline</a></li>
                 
-                    <li><a class="toctree-l4" href="#people">People</a></li>
+            
+                <li class="toctree-l3"><a href="#contact">Contact</a></li>
                 
             
             </ul>
@@ -121,15 +124,32 @@
             <div class="section">
               
                 <h1 id="dcls-gdip">DCLS GDIP</h1>
-<p>Lorem ipsum text about the DCLS GDIP</p>
-<h2 id="pipeline-description">Pipeline description</h2>
-<p>Put an image here with some text</p>
+<p>Pipeline to generate SNP matricies, phylogenetic trees, multilocus sequence typing (MLST) and antimicrobial micorbial resistance gene (AMR) reports from sequenced isolates involved in food-borne outbreak investigations.</p>
+<h1 id="quick-start">Quick Start</h1>
+<p>Assuming the <a href="https://github.com/dcls/gdip/tree/master/scripts">dcls/gdip/scripts</a> directory is on your <code>$PATH</code>:</p>
+<ol>
+<li>Enter a directory with some fastq files ending in <code>_1.fastq.gz</code> and <code>_2.fastq.gz</code>.</li>
+<li>Copy the makefile using the command <code>copy_makefile</code>.</li>
+<li>Run the pipeline with <code>make</code>.</li>
+</ol>
+<pre><code class="sh"># Enter the directory with the data:
+cd exampledata
+
+# Copy the makefile:
+copy_makefile
+
+# Start the pipeline!
+make
+</code></pre>
+
+<p>For full instructions, see the <a href="./userguide">User Guide</a>.</p>
+<h1 id="pipeline">Pipeline</h1>
 <p><img alt="" src="./pipeline.png" /></p>
-<h2 id="quick-start">Quick Start</h2>
-<p>Put a Makefile in the folder, run <code>make</code>. </p>
-<h2 id="people">People</h2>
-<p>Stephen contact info etc.</p>
-<p>Kevin</p>
+<h1 id="contact">Contact</h1>
+<ul>
+<li><a href="http://www.google.com/recaptcha/mailhide/d?k=01lKgXnqE6Va_tcIEkUUMMXA==&amp;c=8cNmVsuwaP7OG163K8z49WDuv5M9HBlzj1rfgVsTX_Y=">Stephen D. Turner</a></li>
+<li><a href="http://www.google.com/recaptcha/mailhide/d?k=01lKgXnqE6Va_tcIEkUUMMXA==&amp;c=dCq1Is6PZSxjhRTptzOs-aBj0v9PvkiwAq3olZuP1Ek=">Kevin G. Libuit</a></li>
+</ul>
               
             </div>
           </div>
@@ -175,5 +195,5 @@
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-08-18 13:10:02.730985
+Build Date UTC : 2016-08-22 13:24:42.858037
 -->

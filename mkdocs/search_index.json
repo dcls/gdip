@@ -2,43 +2,68 @@
     "docs": [
         {
             "location": "/", 
-            "text": "DCLS GDIP\n\n\nLorem ipsum text about the DCLS GDIP\n\n\nPipeline description\n\n\nPut an image here with some text\n\n\n\n\nQuick Start\n\n\nPut a Makefile in the folder, run \nmake\n. \n\n\nPeople\n\n\nStephen contact info etc.\n\n\nKevin", 
+            "text": "DCLS GDIP\n\n\nPipeline to generate SNP matricies, phylogenetic trees, multilocus sequence typing (MLST) and antimicrobial micorbial resistance gene (AMR) reports from sequenced isolates involved in food-borne outbreak investigations.\n\n\nQuick Start\n\n\nAssuming the \ndcls/gdip/scripts\n directory is on your \n$PATH\n:\n\n\n\n\nEnter a directory with some fastq files ending in \n_1.fastq.gz\n and \n_2.fastq.gz\n.\n\n\nCopy the makefile using the command \ncopy_makefile\n.\n\n\nRun the pipeline with \nmake\n.\n\n\n\n\n# Enter the directory with the data:\ncd exampledata\n\n# Copy the makefile:\ncopy_makefile\n\n# Start the pipeline!\nmake\n\n\n\n\nFor full instructions, see the \nUser Guide\n.\n\n\nPipeline\n\n\n\n\nContact\n\n\n\n\nStephen D. Turner\n\n\nKevin G. Libuit", 
             "title": "Home"
         }, 
         {
             "location": "/#dcls-gdip", 
-            "text": "Lorem ipsum text about the DCLS GDIP", 
+            "text": "Pipeline to generate SNP matricies, phylogenetic trees, multilocus sequence typing (MLST) and antimicrobial micorbial resistance gene (AMR) reports from sequenced isolates involved in food-borne outbreak investigations.", 
             "title": "DCLS GDIP"
         }, 
         {
-            "location": "/#pipeline-description", 
-            "text": "Put an image here with some text", 
-            "title": "Pipeline description"
-        }, 
-        {
             "location": "/#quick-start", 
-            "text": "Put a Makefile in the folder, run  make .", 
+            "text": "Assuming the  dcls/gdip/scripts  directory is on your  $PATH :   Enter a directory with some fastq files ending in  _1.fastq.gz  and  _2.fastq.gz .  Copy the makefile using the command  copy_makefile .  Run the pipeline with  make .   # Enter the directory with the data:\ncd exampledata\n\n# Copy the makefile:\ncopy_makefile\n\n# Start the pipeline!\nmake  For full instructions, see the  User Guide .", 
             "title": "Quick Start"
         }, 
         {
-            "location": "/#people", 
-            "text": "Stephen contact info etc.  Kevin", 
-            "title": "People"
+            "location": "/#pipeline", 
+            "text": "", 
+            "title": "Pipeline"
+        }, 
+        {
+            "location": "/#contact", 
+            "text": "Stephen D. Turner  Kevin G. Libuit", 
+            "title": "Contact"
         }, 
         {
             "location": "/userguide/", 
-            "text": "User Guide\n\n\nQuick Start\n\n\nAdvanced Usage\n\n\nScripts", 
+            "text": "User Guide\n\n\nDCLS GDIP runs from the Linux command line and consists of a number of shell scripts and a single Makefile compiling them all. Default parameters will generate a report for NGS reads obtained from \nSalmonella enterica\n subsp enteritidis isolates (Reference strain: \nP125109 (NC_011294.1)\n, MLST; \nSalmonella enterica\n). For other species, see \nAdvanced usage\n.  \n\n\nThis guide assumes an AWS EC2 instance launched from the DCLS GDIP image ami-XXXXX.\n\n\nBasic usage\n\n\nInput\n\n\nDCLS GDIP assumes a project directory with paired fastq files ending in either: \n\n\n\n\n_1.fastq.gz\n and \n_2.fastq.gz\n; or \n\n\nR1.fastq.gz\n and \nR2.fastq.gz\n\n\n\n\nIf your fastq.gz files are on a local drive, create a new project directory on your EC2 instance and use \nscp\n to copy sequence files into that directory:\n\n\n\n\nFrom the EC2 instance: \nmkdir MyProjectDir\n\n\nFrom your local drive: \nscp ~/MyLocalSeqDir/*fastq.gz ubuntu@InstanceIP:~/MyProjectDir/\n\n\n\n\nAlternatively, use a client such as \nCyberduck\n to open up a transfer window, or \nMountainduck\n to mount a cloud storage drive as a local disk in Mac/Finder or Windows/Explorer.\n\n\nSetup\n\n\nThe rest of this documentation assumes the \ndcls/gdip/scripts\n directory is on your \n$PATH\n. If you are using the DCLS GDIP AMI, it already is. If you are not:\n\n\ngit clone https://github.com/dcls/gdip ~/gdip\nexport PATH=~/gdip/scripts:$PATH\n\n\n\n\nOnce a project directory has been created containing the paired-end \n_1.fastq.gz\n+\n_2.fastq.gz\n reads of interest, copy the Makefile into your project directory:\n\n\ncopy_makefile\n\n\n\n\nTypes of analysis\n\n\n\n\nFor a full report (SNP matrix, phylogenetic tree, AMR, MLST) run: \nmake\n.\n\n\nFor a SNP matrix and a phylogenetic tree run: \nmake tree-only\n.\n\n\nFor AMR results only, run: \nmake amr\n.\n\n\nFor MLST results only, run: \nmake mlst\n.\n\n\n\n\nOutput\n\n\nThe default DCLS GDIP pipeline (running \nmake\n) will generate a \nDATE\n-gdip-report.zip\n file containing all requested results. Additional files related to the analysis (e.g. summary logs and intermedaite analysis reports) generated by CFSAN-SNP Pipeline and SRST2 can be found within the CFSAN-output and SRST2 directories, respectively. For more information on other output files, see \nCFSAN-SNP Pipeline\n and \nSRST2\n documentaion.\n\n\nLarge intermediate files can be removed to save disk space by running: \nmake space\n after a run has been completed (this removes sam/bam alignment files in the cfsan output directory).\n\n\nTransfering data to local drive\n\n\nThe \nscp\n command can be used to copy the gdip report to your local drive:\n\n\nscp ubuntu@InstanceIP:~/MyProjectDir/\nDATE\n-gdip-report.zip ~/SomeLocalDir/\n\n\n\n\nAlternatively, use a client such as \nCyberduck\n to open up a transfer window, or \nMountainduck\n to mount a cloud storage drive as a local disk in Mac/Finder or Windows/Explorer.\n\n\nAdvanced Usage\n\n\nDCLS GDIP for different species\n\n\nDefault settings will generate results using genome/MLST references approriate for \nSalmonella enterica\n subsp Enteritidis. This can be changed by downloading alternative references and redirecting \ncfsan-snp.sh\n and \nmlstsrst2.sh\n to those files. Once \ncfsan-snp.sh\n and \nmlstsrst2.sh\n have been editted appropriately, DCLS GDIP can be invoked as described above. \n\n\nChange CFSAN-SNP reference\n\n\nDownload alternative reference in .fasta format and edit the Makefile in \n~/gdip/scripts\n.\n\n\nChange:\n\n\nREF_GENOME := /opt/genomes/senteritidisp125109.fasta\n\n\n\n\nto:\n\n\nREF_GENOME := /path/to/alternativeReference.fasta\n\n\n\n\nChange MLST reference\n\n\nDownload fasta allele sequences and a tab-delimited file which defines the ST profiles as a combination of alleles. These can be retrieved automatically from pubmlst.org/data/ using the script provided by SRST2, e.g.\n\n\ngetmlst.py --species \nEscherichia coli\n\n\n\n\n\nOnce these files are retrieved, edit \ngdip/scripts/mlstsrst2.sh\n:\n\n\nChange\n\n\nMLST_DB=\n/opt/genomes/mlst_senterica/Salmonella_enterica.fasta\n\nMLST_DEF=\n/opt/genomes/mlst_senterica/senterica.txt\n\n\n\n\n\nto:\n\n\nMLST_DB=\n/path/to/alternative/mlst/species.fasta\n\nMLST_DEF=\n/path/to/alternative/mlst/speciesdef.txt\n\n\n\n\n\nScripts\n\n\nThe Makefile runs several scripts, each performing a piece of the analysis. Scripts can be run individually. View script sources \nhere\n.\n\n\n\n\n\n\n\n\nScript\n\n\nDiscription\n\n\n\n\n\n\n\n\n\n\ncfsan-prepare-directories.sh\n\n\nOrganizes reads and symbolic links into the correct directory structure as needed by CFSAN SNP pipeline.\n\n\n\n\n\n\nmultisrst2.sh\n\n\nRuns SRST2 to identify antimicrobial resistance genes on multiple samples in a single directory. Run with \n-h\n option to get some help.\n\n\n\n\n\n\nmlstsrst2.sh\n\n\nRuns SRST2 to generate MLST report on multiple samples in a single directory. Run with \n-h\n option to get some help.\n\n\n\n\n\n\nMakefile\n\n\nRuns the shell scripts listed above, the CFSAN-SNP pipeline and FastTree to generate a final report.\n\n\n\n\n\n\ncopy_makefile\n\n\nCopies the Makefile above to the current working directory, and prints out some instructions.", 
             "title": "User Guide"
         }, 
         {
             "location": "/userguide/#user-guide", 
-            "text": "", 
+            "text": "DCLS GDIP runs from the Linux command line and consists of a number of shell scripts and a single Makefile compiling them all. Default parameters will generate a report for NGS reads obtained from  Salmonella enterica  subsp enteritidis isolates (Reference strain:  P125109 (NC_011294.1) , MLST;  Salmonella enterica ). For other species, see  Advanced usage .    This guide assumes an AWS EC2 instance launched from the DCLS GDIP image ami-XXXXX.", 
             "title": "User Guide"
         }, 
         {
-            "location": "/userguide/#quick-start", 
+            "location": "/userguide/#basic-usage", 
             "text": "", 
-            "title": "Quick Start"
+            "title": "Basic usage"
+        }, 
+        {
+            "location": "/userguide/#input", 
+            "text": "DCLS GDIP assumes a project directory with paired fastq files ending in either:    _1.fastq.gz  and  _2.fastq.gz ; or   R1.fastq.gz  and  R2.fastq.gz   If your fastq.gz files are on a local drive, create a new project directory on your EC2 instance and use  scp  to copy sequence files into that directory:   From the EC2 instance:  mkdir MyProjectDir  From your local drive:  scp ~/MyLocalSeqDir/*fastq.gz ubuntu@InstanceIP:~/MyProjectDir/   Alternatively, use a client such as  Cyberduck  to open up a transfer window, or  Mountainduck  to mount a cloud storage drive as a local disk in Mac/Finder or Windows/Explorer.", 
+            "title": "Input"
+        }, 
+        {
+            "location": "/userguide/#setup", 
+            "text": "The rest of this documentation assumes the  dcls/gdip/scripts  directory is on your  $PATH . If you are using the DCLS GDIP AMI, it already is. If you are not:  git clone https://github.com/dcls/gdip ~/gdip\nexport PATH=~/gdip/scripts:$PATH  Once a project directory has been created containing the paired-end  _1.fastq.gz + _2.fastq.gz  reads of interest, copy the Makefile into your project directory:  copy_makefile", 
+            "title": "Setup"
+        }, 
+        {
+            "location": "/userguide/#types-of-analysis", 
+            "text": "For a full report (SNP matrix, phylogenetic tree, AMR, MLST) run:  make .  For a SNP matrix and a phylogenetic tree run:  make tree-only .  For AMR results only, run:  make amr .  For MLST results only, run:  make mlst .", 
+            "title": "Types of analysis"
+        }, 
+        {
+            "location": "/userguide/#output", 
+            "text": "The default DCLS GDIP pipeline (running  make ) will generate a  DATE -gdip-report.zip  file containing all requested results. Additional files related to the analysis (e.g. summary logs and intermedaite analysis reports) generated by CFSAN-SNP Pipeline and SRST2 can be found within the CFSAN-output and SRST2 directories, respectively. For more information on other output files, see  CFSAN-SNP Pipeline  and  SRST2  documentaion.  Large intermediate files can be removed to save disk space by running:  make space  after a run has been completed (this removes sam/bam alignment files in the cfsan output directory).", 
+            "title": "Output"
+        }, 
+        {
+            "location": "/userguide/#transfering-data-to-local-drive", 
+            "text": "The  scp  command can be used to copy the gdip report to your local drive:  scp ubuntu@InstanceIP:~/MyProjectDir/ DATE -gdip-report.zip ~/SomeLocalDir/  Alternatively, use a client such as  Cyberduck  to open up a transfer window, or  Mountainduck  to mount a cloud storage drive as a local disk in Mac/Finder or Windows/Explorer.", 
+            "title": "Transfering data to local drive"
         }, 
         {
             "location": "/userguide/#advanced-usage", 
@@ -46,28 +71,43 @@
             "title": "Advanced Usage"
         }, 
         {
+            "location": "/userguide/#dcls-gdip-for-different-species", 
+            "text": "Default settings will generate results using genome/MLST references approriate for  Salmonella enterica  subsp Enteritidis. This can be changed by downloading alternative references and redirecting  cfsan-snp.sh  and  mlstsrst2.sh  to those files. Once  cfsan-snp.sh  and  mlstsrst2.sh  have been editted appropriately, DCLS GDIP can be invoked as described above.", 
+            "title": "DCLS GDIP for different species"
+        }, 
+        {
+            "location": "/userguide/#change-cfsan-snp-reference", 
+            "text": "Download alternative reference in .fasta format and edit the Makefile in  ~/gdip/scripts .  Change:  REF_GENOME := /opt/genomes/senteritidisp125109.fasta  to:  REF_GENOME := /path/to/alternativeReference.fasta", 
+            "title": "Change CFSAN-SNP reference"
+        }, 
+        {
+            "location": "/userguide/#change-mlst-reference", 
+            "text": "Download fasta allele sequences and a tab-delimited file which defines the ST profiles as a combination of alleles. These can be retrieved automatically from pubmlst.org/data/ using the script provided by SRST2, e.g.  getmlst.py --species  Escherichia coli   Once these files are retrieved, edit  gdip/scripts/mlstsrst2.sh :  Change  MLST_DB= /opt/genomes/mlst_senterica/Salmonella_enterica.fasta \nMLST_DEF= /opt/genomes/mlst_senterica/senterica.txt   to:  MLST_DB= /path/to/alternative/mlst/species.fasta \nMLST_DEF= /path/to/alternative/mlst/speciesdef.txt", 
+            "title": "Change MLST reference"
+        }, 
+        {
             "location": "/userguide/#scripts", 
-            "text": "", 
+            "text": "The Makefile runs several scripts, each performing a piece of the analysis. Scripts can be run individually. View script sources  here .     Script  Discription      cfsan-prepare-directories.sh  Organizes reads and symbolic links into the correct directory structure as needed by CFSAN SNP pipeline.    multisrst2.sh  Runs SRST2 to identify antimicrobial resistance genes on multiple samples in a single directory. Run with  -h  option to get some help.    mlstsrst2.sh  Runs SRST2 to generate MLST report on multiple samples in a single directory. Run with  -h  option to get some help.    Makefile  Runs the shell scripts listed above, the CFSAN-SNP pipeline and FastTree to generate a final report.    copy_makefile  Copies the Makefile above to the current working directory, and prints out some instructions.", 
             "title": "Scripts"
         }, 
         {
             "location": "/about/", 
-            "text": "Source\n\n\nPeople\n\n\nPipeline Description\n\n\nImplementation\n\n\nVersions\n\n\nAWS configuration", 
+            "text": "Source\n\n\nhttps://github.com/dcls/gdip\n\n\nPeople\n\n\n\n\nStephen D. Turner\n\n\nKevin G. Libuit\n\n\n\n\nPipeline Description\n\n\n\n\nDCLS GDIP is a pipeline developed to analyze and compare sequenced isolates involved in food-borne outbrekes. \n\n\nReports generated from DCLS GDIP will enable identification of high confidence associations between cases of illness that warranting further public health investigation. \n\n\nImplementation\n\n\nVersions\n\n\nAWS configuration", 
             "title": "About"
         }, 
         {
             "location": "/about/#source", 
-            "text": "", 
+            "text": "https://github.com/dcls/gdip", 
             "title": "Source"
         }, 
         {
             "location": "/about/#people", 
-            "text": "", 
+            "text": "Stephen D. Turner  Kevin G. Libuit", 
             "title": "People"
         }, 
         {
             "location": "/about/#pipeline-description", 
-            "text": "", 
+            "text": "DCLS GDIP is a pipeline developed to analyze and compare sequenced isolates involved in food-borne outbrekes.   Reports generated from DCLS GDIP will enable identification of high confidence associations between cases of illness that warranting further public health investigation.", 
             "title": "Pipeline Description"
         }, 
         {
