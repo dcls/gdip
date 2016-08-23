@@ -84,6 +84,7 @@ pip install --upgrade pip
 pip install --user snp-pipeline
 echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bash_profile
 source .bash_profile
+echo $CLASSPATH
 which run_snp_pipeline.sh
 
 
@@ -96,6 +97,7 @@ wget http://cegg.unige.ch/pub/newick-utils-1.6-Linux-x86_64-disabled-extra.tar.g
 tar zxvf newick-utils-1.6-Linux-x86_64-disabled-extra.tar.gz
 sudo cp newick-utils-1.6/src/nw_* /usr/local/bin
 rm -rf newick-utils-1.6*
+which nw_reroot
 
 ## Get shell integration for iterm2, but first fix curl cert issue
 echo 'capath=/etc/ssl/certs/' >> .curlrc
@@ -109,9 +111,6 @@ pip install awscli
 sudo wget -O /usr/local/bin/gargs https://github.com/brentp/gargs/releases/download/v0.3.1/gargs_linux && sudo chmod 755 /usr/local/bin/gargs
 gargs -h
 
-# AWS command line interface
-pip install awscli
-
 
 ################################################################################
 ## Get reference genome fasta files
@@ -120,16 +119,7 @@ pip install awscli
 # >NC_011294.1 Salmonella enterica subsp. enterica serovar Enteritidis str. P125109 complete genome
 sudo mkdir -p /opt/genomes
 echo "curl -s ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF_000009505.1_ASM950v1/GCF_000009505.1_ASM950v1_genomic.fna.gz | gzip -dc > /opt/genomes/senteritidisp125109.fasta" | sudo sh
-
-
-################################################################################
-## Optional: iterm2 shell integration
-################################################################################
-
-# Get shell integration for iterm2, but first fix curl cert issue
-echo 'capath=/etc/ssl/certs/' >> .curlrc
-echo 'cacert=/etc/ssl/certs/ca-certificates.crt' >> .curlrc
-curl -L https://iterm2.com/misc/install_shell_integration_and_utilities.sh | bash
+head /opt/genomes/senteritidisp125109.fasta
 
 
 ################################################################################
@@ -186,6 +176,9 @@ echo "export SRST2_SAMTOOLS=/opt/software/samtools-0.1.18/samtools" >> ~/.bash_p
 echo "export SRST2_BOWTIE2=/opt/software/bowtie2-2.2.4/bowtie2" >> ~/.bash_profile
 echo "export SRST2_BOWTIE2_BUILD=/opt/software/bowtie2-2.2.4/bowtie2-build" >> ~/.bash_profile
 source ~/.bash_profile
+$SRST2_SAMTOOLS
+$SRST2_BOWTIE2 --version
+$SRST2_BOWTIE2_BUILD --version
 
 ## install SRST2
 git clone https://github.com/katholt/srst2
@@ -199,6 +192,14 @@ getmlst.py --species "Salmonella enterica"
 cd ..
 sudo mv mlst_senterica /opt/genomes
 
+################################################################################
+## Get GDIP repo
+################################################################################
+
+cd
+git clone https://github.com/dcls/gdip.git
+echo 'export PATH="$HOME/gdip/scripts:$PATH"' >> ~/.bash_profile
+source .bash_profile
 
 ################################################################################
 ## Optional: create a public AWS AMI
