@@ -8,7 +8,7 @@
 ## This is data from CDC/Pulsenet.
 ## May want to do this in a screen session while you work on other stuff.
 
-mkdir -p ~/exampledata && cd $_
+mkdir -p ~/exampledata && cd ~/exampledata
 
 curl -O "ftp.sra.ebi.ac.uk/vol1/fastq/SRR357/008/SRR3573518/SRR3573518_[1-2].fastq.gz"
 curl -O "ftp.sra.ebi.ac.uk/vol1/fastq/SRR357/005/SRR3573595/SRR3573595_[1-2].fastq.gz"
