@@ -38,6 +38,10 @@ mv SRR3669925_1.fastq.gz PNUSAS002484_1.fastq.gz ; mv SRR3669925_2.fastq.gz PNUS
 mv SRR3669928_1.fastq.gz PNUSAS002485_1.fastq.gz ; mv SRR3669928_2.fastq.gz PNUSAS002485_2.fastq.gz
 mv SRR3669929_1.fastq.gz PNUSAS002486_1.fastq.gz ; mv SRR3669929_2.fastq.gz PNUSAS002486_2.fastq.gz
 
+# optionally subset the data?
+find *gz | parallel --dry-run "zcat {} | head -n 1000000 | gzip -c > subset{}"
+rm -f PNUSAS*.fastq.gz
+rename -v 's/subset//g' subset*.fastq.gz
 
 ################################################################################
 ## Run the CFSAN SNP pipeline on the data you downloaded.
