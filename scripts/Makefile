@@ -15,7 +15,7 @@ clean:
 	rm -rf ./cfsan/ ./cfsan-output/ ./treefile.nwk ./srst2/ ./${DATE}-gdip-report*
 
 space:
-	/bin/bash rm -rf ./cfsan-output/samples/*/*.{sam,bam,pileup} ./srst2/*/*{pileup,bam}
+	find -name "*.bam" -or -name "*.sam" -or -name "*.pileup" | xargs rm
 
 .PHONY: all tree-only amr mlst clean
 
