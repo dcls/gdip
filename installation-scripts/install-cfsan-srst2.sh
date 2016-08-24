@@ -202,6 +202,13 @@ echo 'export PATH="$HOME/gdip/scripts:$PATH"' >> ~/.bash_profile
 source .bash_profile
 
 ################################################################################
+## Get example PulseNet data
+################################################################################
+
+mkdir -p ~/exampledata && cd ~/exampledata
+get_example_pulsenet_data.sh
+
+################################################################################
 ## Optional: create a public AWS AMI
 ################################################################################
 
