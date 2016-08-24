@@ -208,6 +208,7 @@ source .bash_profile
 mkdir -p ~/exampledata && cd ~/exampledata
 get_example_pulsenet_data.sh
 
+
 ################################################################################
 ## Optional: create a public AWS AMI
 ################################################################################
