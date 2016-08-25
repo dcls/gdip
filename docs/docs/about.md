@@ -15,8 +15,3 @@ DCLS GDIP is a pipeline developed to analyze and compare sequenced isolates invo
 
 Reports generated from DCLS GDIP will enable identification of high confidence associations between cases of illness that warranting further public health investigation. 
 
-# Implementation
-
-## Versions
-
-## AWS configuration
