@@ -2,9 +2,24 @@
 
 DCLS GDIP runs from the Linux command line and consists of a number of shell scripts and a single Makefile compiling them all. Default parameters will generate a report for NGS reads obtained from *Salmonella enterica* subsp enteritidis isolates (Reference strain: [P125109 (NC_011294.1)](http://www.ncbi.nlm.nih.gov/nuccore/NC_011294.1), MLST; [Salmonella enterica](http://mlst.warwick.ac.uk/mlst/dbs/Senterica/Downloads_HTML)). For other species, see [Advanced usage](#advanced-usage).  
 
-This guide assumes an AWS EC2 instance launched from the DCLS GDIP image ami-9f630088.
+This guide assumes an AWS EC2 instance launched from the DCLS GDIP image **ami-9f630088**.
 
 # Basic usage
+
+## Update GDIP scripts
+
+The AWS image **ami-9f630088** ships with all necessary scripts for a completely automated analysis. These scripts reside in the `gdip` directory in the _ubuntu_ user's home directory (`/home/ubuntu/gdip`). After launching the image, enter this directory and `git pull` to pull in any changes made to the scripts since the image was created.
+
+```bash
+# Enter the gdip directory
+cd ~/gdip
+
+# Pull any updates since the image was created
+git pull
+
+# Go back to your home directory
+cd
+```
 
 ## Input
 
@@ -18,7 +33,7 @@ If your fastq.gz files are on a local drive, create a new project directory on y
 - From the EC2 instance: `mkdir MyProjectDir`
 - From your local drive: `scp ~/MyLocalSeqDir/*fastq.gz ubuntu@InstanceIP:~/MyProjectDir/`
 
-Alternatively, use a client such as [Cyberduck](https://cyberduck.io) to open up a transfer window, or [Mountainduck](https://mountainduck.io/) to mount a cloud storage drive as a local disk in Mac/Finder or Windows/Explorer.
+Alternatively, use a client such as [Cyberduck](https://cyberduck.io) to open up a transfer window, or [Mountainduck](https://mountainduck.io/) to mount a cloud storage drive as a local disk in Mac/Finder or Windows/Explorer. See [this video](https://www.youtube.com/watch?v=hd4oL3WIPVM) for a quick tutorial.
 
 
 ## Setup
@@ -57,7 +72,8 @@ The `scp` command can be used to copy the gdip report to your local drive:
 scp ubuntu@InstanceIP:~/MyProjectDir/<DATE>-gdip-report.zip ~/SomeLocalDir/
 ```
 
-Alternatively, use a client such as [Cyberduck](https://cyberduck.io) to open up a transfer window, or [Mountainduck](https://mountainduck.io/) to mount a cloud storage drive as a local disk in Mac/Finder or Windows/Explorer.
+Alternatively, use a client such as [Cyberduck](https://cyberduck.io) to open up a transfer window, or [Mountainduck](https://mountainduck.io/) to mount a cloud storage drive as a local disk in Mac/Finder or Windows/Explorer. See [this video](https://www.youtube.com/watch?v=hd4oL3WIPVM) for a quick tutorial.
+
 
 # Advanced Usage
 
