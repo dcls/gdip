@@ -102,7 +102,7 @@
         }, 
         {
             "location": "/about/", 
-            "text": "Source\n\n\nhttps://github.com/dcls/gdip\n\n\nPeople\n\n\n\n\nStephen D. Turner\n\n\nKevin G. Libuit\n\n\n\n\nPipeline Description\n\n\n\n\nDCLS GDIP is a pipeline developed to analyze and compare sequenced isolates involved in food-borne outbrekes. \n\n\nReports generated from DCLS GDIP will enable identification of high confidence associations between cases of illness that warranting further public health investigation.", 
+            "text": "Source\n\n\nhttps://github.com/dcls/gdip\n\n\nPeople\n\n\n\n\nStephen D. Turner\n\n\nKevin G. Libuit\n\n\n\n\nPipeline Description\n\n\n\n\nDCLS GDIP is a pipeline developed to analyze and compare sequenced isolates involved in food-borne outbreaks. \n\n\nReports generated from DCLS GDIP will enable identification of high confidence associations between cases of illness that warranting further public health investigation.", 
             "title": "About"
         }, 
         {
@@ -117,7 +117,7 @@
         }, 
         {
             "location": "/about/#pipeline-description", 
-            "text": "DCLS GDIP is a pipeline developed to analyze and compare sequenced isolates involved in food-borne outbrekes.   Reports generated from DCLS GDIP will enable identification of high confidence associations between cases of illness that warranting further public health investigation.", 
+            "text": "DCLS GDIP is a pipeline developed to analyze and compare sequenced isolates involved in food-borne outbreaks.   Reports generated from DCLS GDIP will enable identification of high confidence associations between cases of illness that warranting further public health investigation.", 
             "title": "Pipeline Description"
         }
     ]
