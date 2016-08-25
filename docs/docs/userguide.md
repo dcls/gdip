@@ -2,7 +2,7 @@
 
 DCLS GDIP runs from the Linux command line and consists of a number of shell scripts and a single Makefile compiling them all. Default parameters will generate a report for NGS reads obtained from *Salmonella enterica* subsp enteritidis isolates (Reference strain: [P125109 (NC_011294.1)](http://www.ncbi.nlm.nih.gov/nuccore/NC_011294.1), MLST; [Salmonella enterica](http://mlst.warwick.ac.uk/mlst/dbs/Senterica/Downloads_HTML)). For other species, see [Advanced usage](#advanced-usage).  
 
-This guide assumes an AWS EC2 instance launched from the DCLS GDIP image ami-XXXXX.
+This guide assumes an AWS EC2 instance launched from the DCLS GDIP image ami-9f630088.
 
 # Basic usage
 
